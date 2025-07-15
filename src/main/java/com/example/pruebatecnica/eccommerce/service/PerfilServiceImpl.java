@@ -22,17 +22,17 @@ public class PerfilServiceImpl implements PerfilService {
 
     @Override
     public List<Perfil> findAll() {
-        return List.of();
+        return perfilRepository.findAll();
     }
 
     @Override
     public Perfil findById(Integer id) {
-        return null;
+        return perfilRepository.findById(id).get();
     }
 
     @Override
     public void deleteById(Integer id) {
-
+        perfilRepository.deleteById(id);
     }
 
     @Override

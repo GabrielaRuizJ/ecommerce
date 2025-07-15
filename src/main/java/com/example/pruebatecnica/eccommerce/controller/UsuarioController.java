@@ -4,9 +4,11 @@ import com.example.pruebatecnica.eccommerce.entity.Usuario;
 import com.example.pruebatecnica.eccommerce.service.UsuarioService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/usuario")
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
@@ -15,7 +17,7 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public Usuario save(@RequestBody Usuario usuario){
         return usuarioService.save(usuario);
     }
