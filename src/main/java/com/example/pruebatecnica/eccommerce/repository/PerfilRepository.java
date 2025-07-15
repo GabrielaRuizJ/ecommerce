@@ -2,8 +2,9 @@ package com.example.pruebatecnica.eccommerce.repository;
 
 import com.example.pruebatecnica.eccommerce.entity.Perfil;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public interface PerfilRepository extends JpaRepository <Perfil, Integer> {
+import java.util.Optional;
+
+public interface PerfilRepository extends JpaRepository<Perfil,Long> {
+    Optional<Perfil> findByNombrePerfil(String nombrePerfil);
 }

@@ -1,42 +1,50 @@
 package com.example.pruebatecnica.eccommerce.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "usuario")
 
-public class Usuario {
+public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private Integer id;
+    private Long id;
     private String usuario;
     private String clave;
     private String nombre;
     private String apellido;
     @Column(unique = true, nullable = false)
     private String email;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "perfil_id", referencedColumnName = "id")
-    private Perfil perfil;
+
+    @OneToMany(cascade=CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "usuario")
+    @JsonIgnore
+    private Set<UsuarioPerfil> usuarioperfils = new HashSet<>();
 
     public Usuario() {
     }
 
-    public Usuario(Integer id, String usuario, String clave, String nombre, String apellido, String email, Perfil perfil) {
+    public Usuario(Long id, String usuario, String clave, String nombre, String apellido, String email, String perfil, Set<UsuarioPerfil> usuarioperfils) {
         this.id = id;
         this.usuario = usuario;
         this.clave = clave;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
-        this.perfil = perfil;
+        this.usuarioperfils = usuarioperfils;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -80,11 +88,31 @@ public class Usuario {
         this.email = email;
     }
 
-    public Perfil getPerfil() {
-        return perfil;
+    public Set<UsuarioPerfil> getUsuarioperfils() {
+        return usuarioperfils;
     }
 
-    public void setPerfil(Perfil perfil) {
-        this.perfil = perfil;
+    public void setUsuarioperfils(Set<UsuarioPerfil> usuarioperfils) {
+        this.usuarioperfils = usuarioperfils;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 }

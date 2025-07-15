@@ -1,47 +1,54 @@
 package com.example.pruebatecnica.eccommerce.entity;
 
 import jakarta.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "Perfil")
-
+@Table(name = "perfil")
 public class Perfil {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String nombre_perfil;
-    private Boolean admin_view;
+    @Column(name = "id_perfil")
+    private Integer idPerfil;
+
+    @Column(name = "nombre_perfil")
+    private String nombrePerfil;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "perfil")
+    private Set<UsuarioPerfil> usuarioPerfils = new HashSet<>();
 
     public Perfil() {
     }
 
-    public Perfil(Integer id, String nombre_perfil, Boolean admin_view) {
-        this.id = id;
-        this.nombre_perfil = nombre_perfil;
-        this.admin_view = admin_view;
+    public Perfil(Integer idPerfil, String nombrePerfil, Set<UsuarioPerfil> usuarioPerfils) {
+        this.idPerfil = idPerfil;
+        this.nombrePerfil = nombrePerfil;
+        this.usuarioPerfils = usuarioPerfils;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdPerfil() {
+        return idPerfil;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdPerfil(Integer idPerfil) {
+        this.idPerfil = idPerfil;
     }
 
-    public String getNombre_perfil() {
-        return nombre_perfil;
+    public String getNombrePerfil() {
+        return nombrePerfil;
     }
 
-    public void setNombre_perfil(String nombre_perfil) {
-        this.nombre_perfil = nombre_perfil;
+    public void setNombrePerfil(String nombrePerfil) {
+        this.nombrePerfil = nombrePerfil;
     }
 
-    public Boolean getAdmin_view() {
-        return admin_view;
+    public Set<UsuarioPerfil> getUsuarioPerfils() {
+        return usuarioPerfils;
     }
 
-    public void setAdmin_view(Boolean admin_view) {
-        this.admin_view = admin_view;
+    public void setUsuarioPerfils(Set<UsuarioPerfil> usuarioPerfils) {
+        this.usuarioPerfils = usuarioPerfils;
     }
 }

@@ -1,14 +1,17 @@
 package com.example.pruebatecnica.eccommerce.service;
 
 import com.example.pruebatecnica.eccommerce.entity.Usuario;
+import com.example.pruebatecnica.eccommerce.entity.UsuarioPerfil;
 
-import java.util.List;
+import java.util.Set;
 
 public interface UsuarioService {
-    Usuario save(Usuario usuario);
-    List<Usuario> findAll();
-    Usuario findById(Integer id);
-    void deleteById(Integer id);
-    Usuario update(Usuario usuario);
+
+
+
+    public Usuario save(Usuario usuario, Set<UsuarioPerfil> usuarioPerfils)throws Exception;
+    public Usuario findById(Long id);
+    public void deleteById(Long id);
+
 
 }
