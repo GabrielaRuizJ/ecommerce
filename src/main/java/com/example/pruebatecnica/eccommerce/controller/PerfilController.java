@@ -29,9 +29,18 @@ public class PerfilController {
     public Perfil findById(@PathVariable Integer id){
         return perfilService.findById(id);
     }
+
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Integer id){
         perfilService.deleteById(id);
+    }
+
+    @PutMapping
+    public Perfil updatePerfil(@RequestBody Perfil perfil){
+        Perfil perfilDb = perfilService.findById(perfil.getId());
+        perfilDb.setNombre_perfil(perfil.getNombre_perfil());
+        perfilDb.setAdmin_view(perfil.getAdmin_view());
+        return perfilService.update(perfilDb);
     }
 
 }

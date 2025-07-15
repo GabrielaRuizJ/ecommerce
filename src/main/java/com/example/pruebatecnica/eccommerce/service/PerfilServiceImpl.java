@@ -37,6 +37,6 @@ public class PerfilServiceImpl implements PerfilService {
 
     @Override
     public Perfil update(Perfil perfil) {
-        return null;
+        return perfilRepository.save(perfil);
     }
 }
