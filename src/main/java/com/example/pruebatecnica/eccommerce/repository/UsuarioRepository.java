@@ -1,4 +1,8 @@
 package com.example.pruebatecnica.eccommerce.repository;
 
-public interface UsuarioRepository {
+import com.example.pruebatecnica.eccommerce.entity.Usuario;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UsuarioRepository extends JpaRepository <Usuario,Integer> {
+
 }
