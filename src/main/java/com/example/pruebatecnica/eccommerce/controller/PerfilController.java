@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-
+@RequestMapping("/api/perfil")
 public class PerfilController {
     private final PerfilService perfilService;
 
@@ -15,7 +15,7 @@ public class PerfilController {
         this.perfilService = perfilService;
     }
 
-    @PostMapping("/create")
+    @PostMapping()
     public Perfil save(@RequestBody Perfil perfil){
         return perfilService.save(perfil);
     }

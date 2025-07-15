@@ -22,21 +22,21 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @Override
     public List<Usuario> findAll() {
-        return List.of();
+        return usuarioRepository.findAll();
     }
 
     @Override
     public Usuario findById(Integer id) {
-        return null;
+        return usuarioRepository.findById(id).get();
     }
 
     @Override
     public void deleteById(Integer id) {
-
+        usuarioRepository.deleteById(id);
     }
 
     @Override
     public Usuario update(Usuario usuario) {
-        return null;
+        return usuarioRepository.save(usuario);
     }
 }
