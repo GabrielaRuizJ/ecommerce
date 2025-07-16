@@ -98,7 +98,21 @@ public class Usuario implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        Set<Authority> authorities = new HashSet<>();
+        this.usuarioperfils.forEach(usuarioPerfil -> {
+            authorities.add(new Authority(usuarioPerfil.getPerfil().getNombrePerfil()));
+        });
+        return authorities;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.clave;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.usuario;
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.example.pruebatecnica.eccommerce.entity.UsuarioPerfil;
 import com.example.pruebatecnica.eccommerce.repository.PerfilRepository;
 import com.example.pruebatecnica.eccommerce.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
@@ -21,8 +22,12 @@ public class UsuarioController {
     @Autowired
     private PerfilRepository perfilRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @PostMapping("/")
     public Usuario save(@RequestBody Usuario usuario)throws Exception{
+        usuario.setClave(this.bCryptPasswordEncoder.encode(usuario.getClave()));
         Set<UsuarioPerfil> perfils = new HashSet<>();
         Perfil perfil = perfilRepository.findByNombrePerfil("CLIENTE")
                 .orElseThrow(() -> new Exception("Perfil CLIENTE no encontrado"));
